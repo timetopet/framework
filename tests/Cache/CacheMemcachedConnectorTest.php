@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase {
+class CacheMemcachedConnectorTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -23,12 +23,10 @@ class CacheMemcachedConnectorTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException RuntimeException
-	 */
-	public function testExceptionThrownOnBadConnection()
+    public function testExceptionThrownOnBadConnection()
 	{
-		$connector = $this->getMock('Illuminate\Cache\MemcachedConnector', array('getMemcached'));
+        $this->expectException(RuntimeException::class);
+        $connector = $this->getMock('Illuminate\Cache\MemcachedConnector', array('getMemcached'));
 		$memcached = m::mock('stdClass');
 		$memcached->shouldReceive('addServer')->once()->with('localhost', 11211, 100);
 		$memcached->shouldReceive('getVersion')->once()->andReturn(false);

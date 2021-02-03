@@ -2,7 +2,7 @@
 
 use Illuminate\Routing\UrlGenerator;
 
-class RoutingUrlGeneratorTest extends PHPUnit_Framework_TestCase {
+class RoutingUrlGeneratorTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	public function testBasicGeneration()
 	{

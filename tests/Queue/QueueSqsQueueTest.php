@@ -5,14 +5,14 @@ use Mockery as m;
 use Aws\Sqs\SqsClient;
 use Guzzle\Service\Resource\Model;
 
-class QueueSqsQueueTest extends PHPUnit_Framework_TestCase {
+class QueueSqsQueueTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
 
-	public function setUp() {
+	public function setUp():void {
 
 		// Use Mockery to mock the SqsClient
 		$this->sqs = m::mock('Aws\Sqs\SqsClient');

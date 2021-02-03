@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Cache\ArrayStore;
 
-class CacheTaggedCacheTest extends PHPUnit_Framework_TestCase {
+class CacheTaggedCacheTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

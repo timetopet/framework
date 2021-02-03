@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Translation\Translator;
 
-class TranslationTranslatorTest extends PHPUnit_Framework_TestCase {
+class TranslationTranslatorTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

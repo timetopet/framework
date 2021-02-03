@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class RoutingMakeControllerCommandTest extends PHPUnit_Framework_TestCase {
+class RoutingMakeControllerCommandTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

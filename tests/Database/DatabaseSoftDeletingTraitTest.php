@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class DatabaseSoftDeletingTraitTest extends PHPUnit_Framework_TestCase {
+class DatabaseSoftDeletingTraitTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

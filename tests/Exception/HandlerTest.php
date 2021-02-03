@@ -3,9 +3,9 @@
 use Illuminate\Exception\Handler;
 use Mockery as m;
 
-class HandlerTest extends PHPUnit_Framework_TestCase
+class HandlerTest extends \Illuminate\Foundation\Testing\FrameworkTestCase
 {
-	protected function setUp()
+	protected function setUp():void
 	{
 		$this->responsePreparer = m::mock('Illuminate\Support\Contracts\ResponsePreparerInterface');
 		$this->plainDisplayer = m::mock('Illuminate\Exception\ExceptionDisplayerInterface');

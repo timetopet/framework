@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class ProviderRepositoryTest extends PHPUnit_Framework_TestCase {
+class ProviderRepositoryTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -102,7 +102,7 @@ class ProviderRepositoryTest extends PHPUnit_Framework_TestCase {
 	public function testWriteManifestStoresToProperLocation()
 	{
 		$repo = new Illuminate\Foundation\ProviderRepository($files = m::mock('Illuminate\Filesystem\Filesystem'), __DIR__);
-		$files->shouldReceive('put')->once()->with(__DIR__.'/services.json', json_encode(array('foo')));
+		$files->shouldReceive('put')->once()->with(__DIR__.'/services.json', json_encode(array('foo'), JSON_PRETTY_PRINT));
 
 		$result = $repo->writeManifest(array('foo'));
 

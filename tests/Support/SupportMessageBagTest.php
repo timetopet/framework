@@ -3,9 +3,9 @@
 use Illuminate\Support\MessageBag;
 use Mockery as m;
 
-class SupportMessageBagTest extends PHPUnit_Framework_TestCase {
+class SupportMessageBagTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

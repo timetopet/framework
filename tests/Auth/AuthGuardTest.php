@@ -3,9 +3,9 @@
 use Mockery as m;
 use Symfony\Component\HttpFoundation\Request;
 
-class AuthGuardTest extends PHPUnit_Framework_TestCase {
+class AuthGuardTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

@@ -2,13 +2,7 @@
 
 use Mockery as m;
 
-class MailMailerTest extends PHPUnit_Framework_TestCase {
-
-	public function tearDown()
-	{
-		m::close();
-	}
-
+class MailMailerTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	public function testMailerSendSendsMessageWithProperViewContent()
 	{
@@ -26,6 +20,9 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$mailer->getSwiftMailer()->shouldReceive('send')->once()->with($message, array());
 		$mailer->send('foo', array('data'), function($m) { $_SERVER['__mailer.test'] = $m; });
 		unset($_SERVER['__mailer.test']);
+
+		//This used to be in teardown, but Closure library can't handle return types on methods.
+        //m:close();
 	}
 
 
@@ -47,6 +44,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$mailer->getSwiftMailer()->shouldReceive('send')->once()->with($message, array());
 		$mailer->send(array('foo', 'bar'), array('data'), function($m) { $_SERVER['__mailer.test'] = $m; });
 		unset($_SERVER['__mailer.test']);
+
 	}
 
 
@@ -68,6 +66,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$mailer->getSwiftMailer()->shouldReceive('send')->once()->with($message, array());
 		$mailer->send(array('html' => 'foo', 'text' => 'bar'), array('data'), function($m) { $_SERVER['__mailer.test'] = $m; });
 		unset($_SERVER['__mailer.test']);
+
 	}
 
 
@@ -90,6 +89,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$queue->shouldReceive('push')->once()->with('mailer@handleQueuedMessage', array('view' => 'foo', 'data' => array(1), 'callback' => 'callable'), 'queue');
 
 		$mailer->queueOn('queue', 'foo', array(1), 'callable');
+
 	}
 
 
@@ -98,10 +98,12 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		list($view, $swift) = $this->getMocks();
 		$mailer = new Illuminate\Mail\Mailer($view, $swift);
 		$mailer->setQueue($queue = m::mock('Illuminate\Queue\QueueManager'));
-		$serialized = serialize(new Illuminate\Support\SerializableClosure($closure = function() {}));
+        $closure = function(){return '';};
+		$serialized = serialize(new Illuminate\Support\SerializableClosure($closure));
 		$queue->shouldReceive('push')->once()->with('mailer@handleQueuedMessage', array('view' => 'foo', 'data' => array(1), 'callback' => $serialized), null);
 
 		$mailer->queue('foo', array(1), $closure);
+
 	}
 
 
@@ -113,6 +115,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$queue->shouldReceive('later')->once()->with(10, 'mailer@handleQueuedMessage', array('view' => 'foo', 'data' => array(1), 'callback' => 'callable'), null);
 
 		$mailer->later(10, 'foo', array(1), 'callable');
+
 	}
 
 
@@ -124,6 +127,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$queue->shouldReceive('later')->once()->with(10, 'mailer@handleQueuedMessage', array('view' => 'foo', 'data' => array(1), 'callback' => 'callable'), 'queue');
 
 		$mailer->laterOn('queue', 10, 'foo', array(1), 'callable');
+
 	}
 
 
@@ -147,6 +151,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$mailer->pretend();
 
 		$mailer->send('foo', array('data'), function($m) {});
+
 	}
 
 
@@ -172,6 +177,8 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$message->shouldReceive('getSwiftMessage')->once()->andReturn($message);
 		$mailer->getSwiftMailer()->shouldReceive('send')->once()->with($message, array());
 		$mailer->send('foo', array('data'), 'FooMailer');
+
+
 	}
 
 
@@ -190,6 +197,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 			$me->assertEquals(array('taylorotwell@gmail.com' => 'Taylor Otwell'), $message->getFrom());
 		});
 		$mailer->send('foo', array('data'), function($m) {});
+
 	}
 
 
@@ -206,6 +214,7 @@ class MailMailerTest extends PHPUnit_Framework_TestCase {
 		$mailer->send('foo', array('data'), function($m) {});
 
 		$this->assertEquals(array('taylorotwell@gmail.com'), $mailer->failures());
+
 	}
 
 

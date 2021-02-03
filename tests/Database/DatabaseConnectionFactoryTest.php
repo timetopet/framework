@@ -6,9 +6,9 @@ class DatabaseConnectionFactoryPDOStub extends PDO {
 	public function __construct() {}
 }
 
-class DatabaseConnectionFactoryTest extends PHPUnit_Framework_TestCase {
+class DatabaseConnectionFactoryTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -87,22 +87,18 @@ class DatabaseConnectionFactoryTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testIfDriverIsntSetExceptionIsThrown()
+    public function testIfDriverIsntSetExceptionIsThrown()
 	{
-		$factory = new Illuminate\Database\Connectors\ConnectionFactory($container = m::mock('Illuminate\Container\Container'));
+        $this->expectException(InvalidArgumentException::class);
+        $factory = new Illuminate\Database\Connectors\ConnectionFactory($container = m::mock('Illuminate\Container\Container'));
 		$factory->createConnector(array('foo'));
 	}
 
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testExceptionIsThrownOnUnsupportedDriver()
+    public function testExceptionIsThrownOnUnsupportedDriver()
 	{
-		$factory = new Illuminate\Database\Connectors\ConnectionFactory($container = m::mock('Illuminate\Container\Container'));
+        $this->expectException(InvalidArgumentException::class);
+        $factory = new Illuminate\Database\Connectors\ConnectionFactory($container = m::mock('Illuminate\Container\Container'));
 		$container->shouldReceive('bound')->once()->andReturn(false);
 		$factory->createConnector(array('driver' => 'foo'));
 	}

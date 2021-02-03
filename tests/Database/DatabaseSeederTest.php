@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Database\Seeder;
 
-class DatabaseSeederTest extends PHPUnit_Framework_TestCase {
+class DatabaseSeederTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

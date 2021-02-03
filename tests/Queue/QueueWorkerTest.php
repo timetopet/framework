@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Queue\Worker;
 
-class QueueWorkerTest extends PHPUnit_Framework_TestCase {
+class QueueWorkerTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -88,12 +88,10 @@ class QueueWorkerTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException RuntimeException
-	 */
-	public function testJobIsReleasedWhenExceptionIsThrown()
+    public function testJobIsReleasedWhenExceptionIsThrown()
 	{
-		$worker = new Illuminate\Queue\Worker(m::mock('Illuminate\Queue\QueueManager'));
+        $this->expectException(RuntimeException::class);
+        $worker = new Illuminate\Queue\Worker(m::mock('Illuminate\Queue\QueueManager'));
 		$job = m::mock('Illuminate\Queue\Jobs\Job');
 		$job->shouldReceive('fire')->once()->andReturnUsing(function() { throw new RuntimeException; });
 		$job->shouldReceive('isDeleted')->once()->andReturn(false);
@@ -103,12 +101,10 @@ class QueueWorkerTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException RuntimeException
-	 */
-	public function testJobIsNotReleasedWhenExceptionIsThrownButJobIsDeleted()
+    public function testJobIsNotReleasedWhenExceptionIsThrownButJobIsDeleted()
 	{
-		$worker = new Illuminate\Queue\Worker(m::mock('Illuminate\Queue\QueueManager'));
+        $this->expectException(RuntimeException::class);
+        $worker = new Illuminate\Queue\Worker(m::mock('Illuminate\Queue\QueueManager'));
 		$job = m::mock('Illuminate\Queue\Jobs\Job');
 		$job->shouldReceive('fire')->once()->andReturnUsing(function() { throw new RuntimeException; });
 		$job->shouldReceive('isDeleted')->once()->andReturn(true);

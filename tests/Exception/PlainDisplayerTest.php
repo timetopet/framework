@@ -3,7 +3,7 @@
 use Illuminate\Exception\PlainDisplayer;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
-class PlainDisplayerTest extends PHPUnit_Framework_TestCase {
+class PlainDisplayerTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	public function testStatusAndHeadersAreSetInResponse()
 	{

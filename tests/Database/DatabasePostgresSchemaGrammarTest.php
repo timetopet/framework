@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Database\Schema\Blueprint;
 
-class DatabasePostgresSchemaGrammarTest extends PHPUnit_Framework_TestCase {
+class DatabasePostgresSchemaGrammarTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

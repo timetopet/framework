@@ -4,9 +4,9 @@ use Mockery as m;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Query\Expression as Raw;
 
-class DatabaseQueryBuilderTest extends PHPUnit_Framework_TestCase {
+class DatabaseQueryBuilderTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -1177,12 +1177,10 @@ class DatabaseQueryBuilderTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException BadMethodCallException
-	 */
-	public function testBuilderThrowsExpectedExceptionWithUndefinedMethod()
+    public function testBuilderThrowsExpectedExceptionWithUndefinedMethod()
 	{
-		$builder = $this->getBuilder();
+        $this->expectException(BadMethodCallException::class);
+        $builder = $this->getBuilder();
 
 		$builder->noValidMethodHere();
 	}

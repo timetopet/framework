@@ -2,16 +2,16 @@
 
 use Mockery as m;
 
-class SupportFacadeTest extends PHPUnit_Framework_TestCase {
+class SupportFacadeTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function setUp()
+	public function setUp():void
 	{
 		Illuminate\Support\Facades\Facade::clearResolvedInstances();
 		FacadeStub::setFacadeApplication(null);
 	}
 
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

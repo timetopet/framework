@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class DatabaseConnectionTest extends PHPUnit_Framework_TestCase {
+class DatabaseConnectionTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -182,12 +182,10 @@ class DatabaseConnectionTest extends PHPUnit_Framework_TestCase {
 		}
 	}
 
-	/**
-	 * @expectedException RuntimeException
-	 */
-	public function testTransactionMethodDisallowPDOChanging()
+    public function testTransactionMethodDisallowPDOChanging()
 	{
-		$pdo = $this->getMock('DatabaseConnectionTestMockPDO', array('beginTransaction', 'commit', 'rollBack'));
+        $this->expectException(RuntimeException::class);
+        $pdo = $this->getMock('DatabaseConnectionTestMockPDO', array('beginTransaction', 'commit', 'rollBack'));
 		$pdo->expects($this->once())->method('beginTransaction');
 		$pdo->expects($this->once())->method('rollBack');
 		$pdo->expects($this->never())->method('commit');

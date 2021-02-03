@@ -2,7 +2,7 @@
 
 use Illuminate\Cache\ArrayStore;
 
-class CacheArrayStoreTest extends PHPUnit_Framework_TestCase {
+class CacheArrayStoreTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	public function testItemsCanBeSetAndRetrieved()
 	{

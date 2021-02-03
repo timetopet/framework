@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class DatabaseMigratorTest extends PHPUnit_Framework_TestCase {
+class DatabaseMigratorTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

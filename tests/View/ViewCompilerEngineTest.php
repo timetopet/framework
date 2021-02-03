@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\View\Engines\CompilerEngine;
 
-class ViewCompilerEngineTest extends PHPUnit_Framework_TestCase {
+class ViewCompilerEngineTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

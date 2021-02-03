@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Pagination\Factory;
 
-class PaginationFactoryTest extends PHPUnit_Framework_TestCase {
+class PaginationFactoryTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

@@ -7,15 +7,15 @@ use Illuminate\Routing\Controller;
 use Illuminate\Container\Container;
 use Illuminate\Routing\ControllerDispatcher;
 
-class RoutingControllerDispatcherTest extends PHPUnit_Framework_TestCase {
+class RoutingControllerDispatcherTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function setUp()
+	public function setUp():void
 	{
 		$_SERVER['ControllerDispatcherTestControllerStub'] = null;
 	}
 
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		unset($_SERVER['ControllerDispatcherTestControllerStub']);
 		m::close();

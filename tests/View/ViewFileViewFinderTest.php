@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class ViewFinderTest extends PHPUnit_Framework_TestCase {
+class ViewFinderTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -74,12 +74,10 @@ class ViewFinderTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testExceptionThrownWhenViewNotFound()
+    public function testExceptionThrownWhenViewNotFound()
 	{
-		$finder = $this->getFinder();
+        $this->expectException(InvalidArgumentException::class);
+        $finder = $this->getFinder();
 		$finder->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/foo.blade.php')->andReturn(false);
 		$finder->getFilesystem()->shouldReceive('exists')->once()->with(__DIR__.'/foo.php')->andReturn(false);
 
@@ -87,22 +85,18 @@ class ViewFinderTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testExceptionThrownOnInvalidViewName()
+    public function testExceptionThrownOnInvalidViewName()
 	{
-		$finder = $this->getFinder();
+        $this->expectException(InvalidArgumentException::class);
+        $finder = $this->getFinder();
 		$finder->find('name::');
 	}
 
 
-	/**
-	 * @expectedException InvalidArgumentException
-	 */
-	public function testExceptionThrownWhenNoHintPathIsRegistered()
+    public function testExceptionThrownWhenNoHintPathIsRegistered()
 	{
-		$finder = $this->getFinder();
+        $this->expectException(InvalidArgumentException::class);
+        $finder = $this->getFinder();
 		$finder->find('name::foo');
 	}
 

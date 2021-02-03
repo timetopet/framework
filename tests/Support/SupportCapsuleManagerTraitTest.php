@@ -4,11 +4,11 @@ use Mockery as m;
 use Illuminate\Container\Container;
 use Illuminate\Support\Traits\CapsuleManagerTrait;
 
-class SupportCapsuleManagerTraitTest extends \PHPUnit_Framework_TestCase {
+class SupportCapsuleManagerTraitTest extends \PHPUnit\Framework\TestCase {
 
 	use CapsuleManagerTrait;
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

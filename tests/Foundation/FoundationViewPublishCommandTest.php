@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class FoundationViewPublishCommandTest extends PHPUnit_Framework_TestCase {
+class FoundationViewPublishCommandTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

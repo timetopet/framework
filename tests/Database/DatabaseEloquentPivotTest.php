@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class DatabaseEloquentPivotTest extends PHPUnit_Framework_TestCase {
+class DatabaseEloquentPivotTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

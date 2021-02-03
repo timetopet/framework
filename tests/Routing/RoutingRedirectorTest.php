@@ -3,7 +3,7 @@
 use Mockery as m;
 use Illuminate\Routing\Redirector;
 
-class RoutingRedirectorTest extends PHPUnit_Framework_TestCase {
+class RoutingRedirectorTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	protected $headers;
 	protected $request;
@@ -11,7 +11,7 @@ class RoutingRedirectorTest extends PHPUnit_Framework_TestCase {
 	protected $session;
 	protected $redirect;
 
-	public function setUp()
+	public function setUp():void
 	{
 		$this->headers = m::mock('Symfony\Component\HttpFoundation\HeaderBag');
 
@@ -33,7 +33,7 @@ class RoutingRedirectorTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

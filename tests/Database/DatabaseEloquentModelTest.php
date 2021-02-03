@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class DatabaseEloquentModelTest extends PHPUnit_Framework_TestCase {
+class DatabaseEloquentModelTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 
@@ -112,12 +112,10 @@ class DatabaseEloquentModelTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException Illuminate\Database\Eloquent\ModelNotFoundException
-	 */
-	public function testFindOrFailMethodThrowsModelNotFoundException()
+    public function testFindOrFailMethodThrowsModelNotFoundException()
 	{
-		$result = EloquentModelFindNotFoundStub::findOrFail(1);
+        $this->expectException(Illuminate\Database\Eloquent\ModelNotFoundException::class);
+        $result = EloquentModelFindNotFoundStub::findOrFail(1);
 	}
 
 
@@ -626,12 +624,10 @@ class DatabaseEloquentModelTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException Illuminate\Database\Eloquent\MassAssignmentException
-	 */
-	public function testGlobalGuarded()
+    public function testGlobalGuarded()
 	{
-		$model = new EloquentModelStub;
+        $this->expectException(Illuminate\Database\Eloquent\MassAssignmentException::class);
+        $model = new EloquentModelStub;
 		$model->guard(array('*'));
 		$model->fill(array('name' => 'foo', 'age' => 'bar', 'votes' => 'baz'));
 	}
@@ -845,12 +841,10 @@ class DatabaseEloquentModelTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException LogicException
-	 */
-	public function testGetModelAttributeMethodThrowsExceptionIfNotRelation()
+    public function testGetModelAttributeMethodThrowsExceptionIfNotRelation()
 	{
-		$model = new EloquentModelStub;
+        $this->expectException(LogicException::class);
+        $model = new EloquentModelStub;
 		$relation = $model->incorrect_relation_stub;
 	}
 

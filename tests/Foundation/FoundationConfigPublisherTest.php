@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class FoundationConfigPublisherTest extends PHPUnit_Framework_TestCase {
+class FoundationConfigPublisherTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

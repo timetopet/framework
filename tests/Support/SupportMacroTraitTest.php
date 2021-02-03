@@ -1,11 +1,11 @@
 <?php
 
 
-class SupportMacroTraitTest extends \PHPUnit_Framework_TestCase {
+class SupportMacroTraitTest extends \PHPUnit\Framework\TestCase {
 
 	private $macroTrait;
 
-	public function setUp()
+	public function setUp():void
 	{
 		$this->macroTrait = $this->createObjectForTrait();
 	}

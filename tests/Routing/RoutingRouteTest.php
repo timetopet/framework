@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 
-class RoutingRouteTest extends PHPUnit_Framework_TestCase {
+class RoutingRouteTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	public function testBasicDispatchingOfRoutes()
 	{
@@ -144,23 +144,19 @@ class RoutingRouteTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-	 */
-	public function testRoutesDontMatchNonMatchingPathsWithLeadingOptionals()
+    public function testRoutesDontMatchNonMatchingPathsWithLeadingOptionals()
 	{
-		$router = $this->getRouter();
+        $this->expectException(Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $router = $this->getRouter();
 		$router->get('{baz?}', function($age = 25) { return $age; });
 		$this->assertEquals('25', $router->dispatch(Request::create('foo/bar', 'GET'))->getContent());
 	}
 
 
-	/**
-	 * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-	 */
-	public function testRoutesDontMatchNonMatchingDomain()
+    public function testRoutesDontMatchNonMatchingDomain()
 	{
-		$router = $this->getRouter();
+        $this->expectException(Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $router = $this->getRouter();
 		$route = $router->get('foo/bar', array('domain' => 'api.foo.bar', function() { return 'hello'; }));
 		$this->assertEquals('hello', $router->dispatch(Request::create('http://api.baz.boom/foo/bar', 'GET'))->getContent());
 	}
@@ -580,12 +576,10 @@ class RoutingRouteTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-	 */
-	public function testModelBindingWithNullReturn()
+    public function testModelBindingWithNullReturn()
 	{
-		$router = $this->getRouter();
+        $this->expectException(Symfony\Component\HttpKernel\Exception\NotFoundHttpException::class);
+        $router = $this->getRouter();
 		$router->get('foo/{bar}', function($name) { return $name; });
 		$router->model('bar', 'RouteModelBindingNullStub');
 		$router->dispatch(Request::create('foo/taylor', 'GET'))->getContent();

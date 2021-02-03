@@ -6,7 +6,7 @@ use Illuminate\Encryption\Encrypter;
  * Class EncrypterTest
  * Modified by TimeToPet. Tests borrowed from https://github.com/neoxia/laravel-openssl-encryption
  */
-class EncrypterTest extends PHPUnit_Framework_TestCase {
+class EncrypterTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	public function testEncryption()
 	{
@@ -26,22 +26,18 @@ class EncrypterTest extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa', $e->decrypt($encrypted));
 	}
 
-    /**
-     * @expectedException Illuminate\Encryption\DecryptException
-     */
     public function testExceptionThrownWhenPayloadIsInvalid()
     {
+        $this->expectException(Illuminate\Encryption\DecryptException::class);
         $e = $this->getEncrypter();
         $payload = $e->encrypt('foo');
         $payload .= 'adslkadlf';
         $e->decrypt($payload);
     }
 
-    /**
-     * @expectedException Illuminate\Encryption\DecryptException
-     */
     public function testExceptionThrownWhenValueIsInvalid()
     {
+        $this->expectException(Illuminate\Encryption\DecryptException::class);
         $e = $this->getEncrypter();
         $payload = $e->encrypt('foo');
         $payload .= 'adlkasdf';

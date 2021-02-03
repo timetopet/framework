@@ -1,6 +1,6 @@
 <?php
 
-class ViewEngineResolverTest extends PHPUnit_Framework_TestCase {
+class ViewEngineResolverTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
 	public function testResolversMayBeResolved()
 	{
@@ -14,7 +14,7 @@ class ViewEngineResolverTest extends PHPUnit_Framework_TestCase {
 
 	public function testResolverThrowsExceptionOnUnknownEngine()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->expectException('InvalidArgumentException');
 		$resolver = new Illuminate\View\Engines\EngineResolver;
 		$resolver->resolve('foo');
 	}

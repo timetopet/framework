@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class SessionMiddlewareTest extends PHPUnit_Framework_TestCase {
+class SessionMiddlewareTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Log\Writer;
 
-class LogWriterTest extends PHPUnit_Framework_TestCase {
+class LogWriterTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -69,12 +69,10 @@ class LogWriterTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException RuntimeException
-	 */
-	public function testListenShortcutFailsWithNoDispatcher()
+    public function testListenShortcutFailsWithNoDispatcher()
 	{
-		$writer = new Writer($monolog = m::mock('Monolog\Logger'));
+        $this->expectException(RuntimeException::class);
+        $writer = new Writer($monolog = m::mock('Monolog\Logger'));
 		$writer->listen(function() {});
 	}
 

@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Database\Migrations\DatabaseMigrationRepository;
 
-class DatabaseMigrationRepositoryTest extends PHPUnit_Framework_TestCase {
+class DatabaseMigrationRepositoryTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

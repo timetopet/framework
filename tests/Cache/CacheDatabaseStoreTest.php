@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Cache\DatabaseStore;
 
-class CacheDatabaseStoreTest extends PHPUnit_Framework_TestCase {
+class CacheDatabaseStoreTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

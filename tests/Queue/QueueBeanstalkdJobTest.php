@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class QueueBeanstalkdJobTest extends PHPUnit_Framework_TestCase {
+class QueueBeanstalkdJobTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

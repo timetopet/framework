@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Foundation\Application;
 
-class FoundationApplicationTest extends PHPUnit_Framework_TestCase {
+class FoundationApplicationTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -126,7 +126,7 @@ class FoundationApplicationTest extends PHPUnit_Framework_TestCase {
 
 	public function testHandleRespectsCatchArgument()
 	{
-		$this->setExpectedException('Exception');
+		$this->expectException('Exception');
 		$app = new Application;
 		$app['router'] = $router = m::mock('StdClass');
 		$router->shouldReceive('dispatch')->andThrow('Exception');

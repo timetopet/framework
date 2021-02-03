@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Database\Console\Migrations\ResetCommand;
 
-class DatabaseMigrationResetCommandTest extends PHPUnit_Framework_TestCase {
+class DatabaseMigrationResetCommandTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class SessionStoreTest extends PHPUnit_Framework_TestCase {
+class SessionStoreTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -32,7 +32,7 @@ class SessionStoreTest extends PHPUnit_Framework_TestCase {
 
 	public function testSessionGetBagException()
 	{
-		$this->setExpectedException('InvalidArgumentException');
+		$this->expectException('InvalidArgumentException');
 		$session = $this->getSession();
 		$session->getBag('doesNotExist');
 	}

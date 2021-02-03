@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class QueueListenerTest extends PHPUnit_Framework_TestCase {
+class QueueListenerTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

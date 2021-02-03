@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Auth\Reminders\PasswordBroker;
 
-class AuthPasswordBrokerTest extends PHPUnit_Framework_TestCase {
+class AuthPasswordBrokerTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
@@ -21,12 +21,10 @@ class AuthPasswordBrokerTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	/**
-	 * @expectedException UnexpectedValueException
-	 */
-	public function testGetUserThrowsExceptionIfUserDoesntImplementRemindable()
+    public function testGetUserThrowsExceptionIfUserDoesntImplementRemindable()
 	{
-		$broker = $this->getBroker($mocks = $this->getMocks());
+        $this->expectException(UnexpectedValueException::class);
+        $broker = $this->getBroker($mocks = $this->getMocks());
 		$mocks['users']->shouldReceive('retrieveByCredentials')->once()->with(array('foo'))->andReturn('bar');
 
 		$broker->getUser(array('foo'));

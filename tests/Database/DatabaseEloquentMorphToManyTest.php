@@ -3,9 +3,9 @@
 use Mockery as m;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
-class DatabaseEloquentMorphToManyTest extends PHPUnit_Framework_TestCase {
+class DatabaseEloquentMorphToManyTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

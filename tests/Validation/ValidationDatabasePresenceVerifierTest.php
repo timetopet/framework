@@ -2,9 +2,9 @@
 
 use Mockery as m;
 
-class ValidationDatabasePresenceVerifierTest extends PHPUnit_Framework_TestCase {
+class ValidationDatabasePresenceVerifierTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}

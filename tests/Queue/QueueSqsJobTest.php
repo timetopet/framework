@@ -6,9 +6,9 @@ use Guzzle\Common\Collection;
 use Aws\Common\Signature\SignatureV4;
 use Aws\Common\Credentials\Credentials;
 
-class QueueSqsJobTest extends PHPUnit_Framework_TestCase {
+class QueueSqsJobTest extends \Illuminate\Foundation\Testing\FrameworkTestCase {
 
-	public function setUp() {
+	public function setUp():void {
 
 		$this->key = 'AMAZONSQSKEY';
 		$this->secret = 'AmAz0n+SqSsEcReT+aLpHaNuM3R1CsTr1nG';
@@ -47,7 +47,7 @@ class QueueSqsJobTest extends PHPUnit_Framework_TestCase {
 	}
 
 
-	public function tearDown()
+	public function tearDown():void
 	{
 		m::close();
 	}
