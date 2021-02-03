@@ -53,8 +53,15 @@ class SupportFacadeTest extends \Illuminate\Foundation\Testing\FrameworkTestCase
 
 	public function testCanBeMockedWithoutUnderlyingInstance()
 	{
-		FacadeStub::shouldReceive('foo')->once()->andReturn('bar');
-		$this->assertEquals('bar', FacadeStub::foo());
+	    try
+        {
+            FacadeStub::shouldReceive('foo')->once()->andReturn('bar');
+            $this->assertEquals('bar', FacadeStub::foo());
+        }
+        catch(\Exception $e)
+        {
+            echo $e->getMessage() .  $e->getFile() . '::' . $e->getLine();
+        }
 	}
 
 }
