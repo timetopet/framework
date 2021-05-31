@@ -14,8 +14,18 @@ This is a fork of Laravel 4.2 which has stopped receiving any updates for years.
 
 1. Open your project's root composer.json file.
 2. Find `"laravel/framework": "4.2.22@dev"` and replace with `"laravel/framework": "4.3.x-dev"`.
-3. For running your tests locally, we need to update phpunit and mockery. Change `"phpunit/phpunit": "~4.0"` to `"phpunit/phpunit": "~8.0"`. Change `"mockery/mockery": "dev-master@dev"` to `"mockery/mockery": "~1.3.0"`
+3. If it doesn't exist, add  `repositories` to your composer.json. This instructs composer to use our forked version of laravel. For example:
 
+```
+"repositories": [
+{
+    "type": "vcs",
+    "url": "https://github.com/timetopet/framework.git"
+}
+```
 
-remove `syntaxCheck` config option from phpunit.xml
+(These steps are only for running tests, not relevant to production installs i.e composer install --no-dev)
+4. For running your tests locally, we need to update phpunit and mockery. Change `"phpunit/phpunit": "~4.0"` to `"phpunit/phpunit": "~8.0"`. Change `"mockery/mockery": "dev-master@dev"` to `"mockery/mockery": "~1.3.0"`
+5. remove `syntaxCheck` config option from phpunit.xml
 Any of your local tests that override phpunit TestCase methods,  will need to be updated to include return type declarations i.e `public function setUp()` to `public function setUp():void` 
+6. Run Composer install.
