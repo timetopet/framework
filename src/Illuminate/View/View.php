@@ -1,5 +1,6 @@
 <?php namespace Illuminate\View;
 
+use Exception;
 use ArrayAccess;
 use Closure;
 use Illuminate\Support\MessageBag;
