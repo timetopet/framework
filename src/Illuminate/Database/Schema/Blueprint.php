@@ -631,9 +631,9 @@ class Blueprint {
 	 */
 	public function timestamps()
 	{
-		$this->timestamp('created_at');
+		$this->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
 
-		$this->timestamp('updated_at');
+		$this->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
 	}
 
 	/**
