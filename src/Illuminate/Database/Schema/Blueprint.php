@@ -619,9 +619,7 @@ class Blueprint {
 	 */
 	public function nullableTimestamps()
 	{
-		$this->timestamp('created_at')->nullable();
-
-		$this->timestamp('updated_at')->nullable();
+		$this->timestamps();
 	}
 
 	/**
@@ -631,9 +629,9 @@ class Blueprint {
 	 */
 	public function timestamps()
 	{
-		$this->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+		$this->timestamp('created_at')->nullable();
 
-		$this->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'));
+		$this->timestamp('updated_at')->nullable();
 	}
 
 	/**
