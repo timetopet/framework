@@ -106,6 +106,11 @@ class ListenCommand extends Command {
 		{
 			$this->output->write($line);
 		});
+
+		$this->listener->setDownForMaintenanceCallback(function()
+		{
+			return $this->laravel->isDownForMaintenance();
+		});
 	}
 
 	/**

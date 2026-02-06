@@ -48,6 +48,13 @@ class Listener {
 	protected $outputHandler;
 
 	/**
+	 * Callback to determine if we should stop for maintenance.
+	 *
+	 * @var \Closure|null
+	 */
+	protected $downForMaintenance;
+
+	/**
 	 * Create a new queue listener.
 	 *
 	 * @param  string  $commandPath
@@ -92,6 +99,11 @@ class Listener {
 		{
 			$this->handleWorkerOutput($type, $line);
 		});
+
+		if (isset($this->downForMaintenance) && call_user_func($this->downForMaintenance))
+		{
+			$this->stop(); return;
+		}
 
 		// Once we have run the job we'll go check if the memory limit has been
 		// exceeded for the script. If it has, we will kill this script so a
@@ -180,6 +192,17 @@ class Listener {
 	public function setOutputHandler(Closure $outputHandler)
 	{
 		$this->outputHandler = $outputHandler;
+	}
+
+	/**
+	 * Set the callback used to determine maintenance mode.
+	 *
+	 * @param  \Closure  $downForMaintenance
+	 * @return void
+	 */
+	public function setDownForMaintenanceCallback(Closure $downForMaintenance)
+	{
+		$this->downForMaintenance = $downForMaintenance;
 	}
 
 	/**
