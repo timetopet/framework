@@ -731,7 +731,7 @@ class DatabaseQueryBuilderTest extends \Illuminate\Foundation\Testing\FrameworkT
 	}
 
 
-	public function testListMethodsGetsArrayOfColumnValues()
+	public function testPluckMethodsGetsArrayOfColumnValues()
 	{
 		$builder = $this->getBuilder();
 		$builder->getConnection()->shouldReceive('select')->once()->andReturn(array(array('foo' => 'bar'), array('foo' => 'baz')));
@@ -739,7 +739,7 @@ class DatabaseQueryBuilderTest extends \Illuminate\Foundation\Testing\FrameworkT
 		{
 			return $results;
 		});
-		$results = $builder->from('users')->where('id', '=', 1)->lists('foo');
+		$results = $builder->from('users')->where('id', '=', 1)->pluck('foo');
 		$this->assertEquals(array('bar', 'baz'), $results);
 
 		$builder = $this->getBuilder();
@@ -748,7 +748,7 @@ class DatabaseQueryBuilderTest extends \Illuminate\Foundation\Testing\FrameworkT
 		{
 			return $results;
 		});
-		$results = $builder->from('users')->where('id', '=', 1)->lists('foo', 'id');
+		$results = $builder->from('users')->where('id', '=', 1)->pluck('foo', 'id');
 		$this->assertEquals(array(1 => 'bar', 10 => 'baz'), $results);
 	}
 
@@ -849,12 +849,12 @@ class DatabaseQueryBuilderTest extends \Illuminate\Foundation\Testing\FrameworkT
 	}
 
 
-	public function testPluckMethodReturnsSingleColumn()
+	public function testValueMethodReturnsSingleColumn()
 	{
 		$builder = $this->getBuilder();
 		$builder->getConnection()->shouldReceive('select')->once()->with('select "foo" from "users" where "id" = ? limit 1', array(1))->andReturn(array(array('foo' => 'bar')));
 		$builder->getProcessor()->shouldReceive('processSelect')->once()->with($builder, array(array('foo' => 'bar')))->andReturn(array(array('foo' => 'bar')));
-		$results = $builder->from('users')->where('id', '=', 1)->pluck('foo');
+		$results = $builder->from('users')->where('id', '=', 1)->value('foo');
 		$this->assertEquals('bar', $results);
 	}
 
