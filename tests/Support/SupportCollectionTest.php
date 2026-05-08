@@ -261,8 +261,8 @@ class SupportCollectionTest extends \Illuminate\Foundation\Testing\FrameworkTest
 	public function testPluckWithArrayAndObjectValues()
 	{
 		$data = new Collection(array((object) array('name' => 'taylor', 'email' => 'foo'), array('name' => 'dayle', 'email' => 'bar')));
-		$this->assertEquals(array('taylor' => 'foo', 'dayle' => 'bar'), $data->pluck('email', 'name'));
-		$this->assertEquals(array('foo', 'bar'), $data->pluck('email'));
+		$this->assertEquals(array('taylor' => 'foo', 'dayle' => 'bar'), $data->pluck('email', 'name')->all());
+		$this->assertEquals(array('foo', 'bar'), $data->pluck('email')->all());
 	}
 
 
@@ -349,7 +349,7 @@ class SupportCollectionTest extends \Illuminate\Foundation\Testing\FrameworkTest
 		$modelTwo = new TestAccessorEloquentTestStub(array('some' => 'bar'));
 		$data     = new Collection(array($model, $modelTwo));
 
-		$this->assertEquals(array('foo', 'bar'), $data->pluck('some'));
+		$this->assertEquals(array('foo', 'bar'), $data->pluck('some')->all());
 	}
 
 
@@ -439,7 +439,7 @@ class SupportCollectionTest extends \Illuminate\Foundation\Testing\FrameworkTest
 		));
 
 		$c = $c->sortBy('foo.bar');
-		$this->assertEquals(array(2, 1), $c->pluck('id'));
+		$this->assertEquals(array(2, 1), $c->pluck('id')->all());
 	}
 
 

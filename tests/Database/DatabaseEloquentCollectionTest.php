@@ -177,8 +177,8 @@ class DatabaseEloquentCollectionTest extends \Illuminate\Foundation\Testing\Fram
 	public function testPluck()
 	{
 		$data = new Collection(array((object) array('name' => 'taylor', 'email' => 'foo'), (object) array('name' => 'dayle', 'email' => 'bar')));
-		$this->assertEquals(array('taylor' => 'foo', 'dayle' => 'bar'), $data->pluck('email', 'name'));
-		$this->assertEquals(array('foo', 'bar'), $data->pluck('email'));
+		$this->assertEquals(array('taylor' => 'foo', 'dayle' => 'bar'), $data->pluck('email', 'name')->all());
+		$this->assertEquals(array('foo', 'bar'), $data->pluck('email')->all());
 	}
 
 

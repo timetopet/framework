@@ -1522,11 +1522,11 @@ class Builder {
 	}
 
 	/**
-	 * Get an array with the values of a given column.
+	 * Get a collection with the values of a given column.
 	 *
 	 * @param  string  $column
 	 * @param  string  $key
-	 * @return array
+	 * @return Collection
 	 */
 	public function pluck($column, $key = null)
 	{
@@ -1546,10 +1546,10 @@ class Builder {
 		{
 			$keys = $results->fetch($key)->all();
 
-			return array_combine($keys, $values);
+			return new Collection(array_combine($keys, $values));
 		}
 
-		return $values;
+		return new Collection($values);
 	}
 
 	/**
@@ -1583,9 +1583,9 @@ class Builder {
 	 */
 	public function implode($column, $glue = null)
 	{
-		if (is_null($glue)) return implode($this->pluck($column));
+		if (is_null($glue)) return implode($this->pluck($column)->all());
 
-		return implode($glue, $this->pluck($column));
+		return implode($glue, $this->pluck($column)->all());
 	}
 
 	/**
