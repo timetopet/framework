@@ -1346,12 +1346,12 @@ class Builder {
 	}
 
 	/**
-	 * Pluck a single column's value from the first result of a query.
+	 * Get a single column's value from the first result of a query.
 	 *
 	 * @param  string  $column
 	 * @return mixed
 	 */
-	public function pluck($column)
+	public function value($column)
 	{
 		$result = (array) $this->first(array($column));
 
@@ -1528,7 +1528,7 @@ class Builder {
 	 * @param  string  $key
 	 * @return array
 	 */
-	public function lists($column, $key = null)
+	public function pluck($column, $key = null)
 	{
 		$columns = $this->getListSelect($column, $key);
 
@@ -1583,9 +1583,9 @@ class Builder {
 	 */
 	public function implode($column, $glue = null)
 	{
-		if (is_null($glue)) return implode($this->lists($column));
+		if (is_null($glue)) return implode($this->pluck($column));
 
-		return implode($glue, $this->lists($column));
+		return implode($glue, $this->pluck($column));
 	}
 
 	/**

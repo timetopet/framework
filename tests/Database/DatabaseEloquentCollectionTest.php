@@ -174,11 +174,11 @@ class DatabaseEloquentCollectionTest extends \Illuminate\Foundation\Testing\Fram
 	}
 
 
-	public function testLists()
+	public function testPluck()
 	{
 		$data = new Collection(array((object) array('name' => 'taylor', 'email' => 'foo'), (object) array('name' => 'dayle', 'email' => 'bar')));
-		$this->assertEquals(array('taylor' => 'foo', 'dayle' => 'bar'), $data->lists('email', 'name'));
-		$this->assertEquals(array('foo', 'bar'), $data->lists('email'));
+		$this->assertEquals(array('taylor' => 'foo', 'dayle' => 'bar'), $data->pluck('email', 'name'));
+		$this->assertEquals(array('foo', 'bar'), $data->pluck('email'));
 	}
 
 
