@@ -277,7 +277,7 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
 	 */
 	public function implode($value, $glue = null)
 	{
-		return implode($glue, $this->pluck($value));
+		return implode($glue, $this->pluck($value)->all());
 	}
 
 	/**
@@ -322,15 +322,16 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
 	}
 
 	/**
-	 * Get an array with the values of a given key.
+	 * Get a collection with the values of a given key.
 	 *
 	 * @param  string  $value
 	 * @param  string  $key
-	 * @return array
+	 * @return static
 	 */
 	public function pluck($value, $key = null)
 	{
-		return array_pluck($this->items, $value, $key);
+		// Always return a Illuminate\Support\Collection instance, even on child classes
+		return new self(array_pluck($this->items, $value, $key));
 	}
 
 	/**

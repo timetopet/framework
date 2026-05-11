@@ -199,15 +199,15 @@ class Builder {
 	}
 
 	/**
-	 * Get an array with the values of a given column.
+	 * Get a collection with the values of a given column.
 	 *
 	 * @param  string  $column
 	 * @param  string  $key
-	 * @return array
+	 * @return Collection
 	 */
 	public function pluck($column, $key = null)
 	{
-		$results = $this->query->pluck($column, $key);
+		$results = $this->query->pluck($column, $key)->all();
 
 		// If the model has a mutator for the requested column, we will spin through
 		// the results and mutate the values so that the mutated version of these
@@ -222,7 +222,7 @@ class Builder {
 			}
 		}
 
-		return $results;
+		return new \Illuminate\Support\Collection($results);
 	}
 
 	/**

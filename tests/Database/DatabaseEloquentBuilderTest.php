@@ -175,7 +175,7 @@ class DatabaseEloquentBuilderTest extends \Illuminate\Foundation\Testing\Framewo
 		$builder->getModel()->shouldReceive('newFromBuilder')->with(array('name' => 'bar'))->andReturn(new EloquentBuilderTestPluckStub(array('name' => 'bar')));
 		$builder->getModel()->shouldReceive('newFromBuilder')->with(array('name' => 'baz'))->andReturn(new EloquentBuilderTestPluckStub(array('name' => 'baz')));
 
-		$this->assertEquals(array('foo_bar', 'foo_baz'), $builder->pluck('name'));
+		$this->assertEquals(array('foo_bar', 'foo_baz'), $builder->pluck('name')->all());
 	}
 
 
@@ -186,7 +186,7 @@ class DatabaseEloquentBuilderTest extends \Illuminate\Foundation\Testing\Framewo
 		$builder->setModel($this->getMockModel());
 		$builder->getModel()->shouldReceive('hasGetMutator')->with('name')->andReturn(false);
 
-		$this->assertEquals(array('bar', 'baz'), $builder->pluck('name'));
+		$this->assertEquals(array('bar', 'baz'), $builder->pluck('name')->all());
 	}
 
 

@@ -494,7 +494,7 @@ class BelongsToMany extends Relation {
 
 		$fullKey = $related->getQualifiedKeyName();
 
-		return $this->getQuery()->select($fullKey)->pluck($related->getKeyName());
+		return $this->getQuery()->select($fullKey)->pluck($related->getKeyName())->all();
 	}
 
 	/**
@@ -594,7 +594,7 @@ class BelongsToMany extends Relation {
 		// First we need to attach any of the associated models that are not currently
 		// in this joining table. We'll spin through the given IDs, checking to see
 		// if they exist in the array of current ones, and if not we will insert.
-		$current = $this->newPivotQuery()->pluck($this->otherKey);
+		$current = $this->newPivotQuery()->pluck($this->otherKey)->all();
 
 		$records = $this->formatSyncList($ids);
 

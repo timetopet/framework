@@ -739,7 +739,7 @@ class DatabaseQueryBuilderTest extends \Illuminate\Foundation\Testing\FrameworkT
 		{
 			return $results;
 		});
-		$results = $builder->from('users')->where('id', '=', 1)->pluck('foo');
+		$results = $builder->from('users')->where('id', '=', 1)->pluck('foo')->all();
 		$this->assertEquals(array('bar', 'baz'), $results);
 
 		$builder = $this->getBuilder();
@@ -748,7 +748,7 @@ class DatabaseQueryBuilderTest extends \Illuminate\Foundation\Testing\FrameworkT
 		{
 			return $results;
 		});
-		$results = $builder->from('users')->where('id', '=', 1)->pluck('foo', 'id');
+		$results = $builder->from('users')->where('id', '=', 1)->pluck('foo', 'id')->all();
 		$this->assertEquals(array(1 => 'bar', 10 => 'baz'), $results);
 	}
 
