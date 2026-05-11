@@ -330,7 +330,8 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
 	 */
 	public function pluck($value, $key = null)
 	{
-		return new static(array_pluck($this->items, $value, $key));
+		// Always return a Illuminate\Support\Collection instance, even on child classes
+		return new self(array_pluck($this->items, $value, $key));
 	}
 
 	/**
